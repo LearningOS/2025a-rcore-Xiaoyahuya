@@ -11,10 +11,12 @@
 #![deny(warnings)]
 #![no_std]
 #![no_main]
-#![feature(panic_info_message)]
+//#![feature(panic_info_message)]
 
-use core::arch::global_asm;
+use core::{arch::global_asm};
 use log::*;
+
+use crate::console::print_color;
 
 #[macro_use]
 mod console;
@@ -54,6 +56,7 @@ pub fn rust_main() -> ! {
     clear_bss();
     logging::init();
     println!("[kernel] Hello, world!");
+    print_color(format_args!("{}", "Hello, world!\n"));
     trace!(
         "[kernel] .text [{:#x}, {:#x})",
         stext as usize,

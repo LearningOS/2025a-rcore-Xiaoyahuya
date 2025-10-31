@@ -13,6 +13,12 @@ impl Write for Stdout {
     }
 }
 
+pub fn print_color(args: fmt::Arguments) {
+    let _ = Stdout.write_str("\x1b[31m");
+    Stdout.write_fmt(args).unwrap();
+    let _ = Stdout.write_str("\x1b[0m");
+}
+
 pub fn print(args: fmt::Arguments) {
     Stdout.write_fmt(args).unwrap();
 }
